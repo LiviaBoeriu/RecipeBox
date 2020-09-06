@@ -1,5 +1,5 @@
 # Recipe box
-> Using paper to write kitchen recipes should no longer be the standard, first because we care about the environment and second because paper either degrades or gets lost.
+Using paper to write kitchen recipes should no longer be the standard, first because we care about the environment and second because paper either degrades or gets lost.
 This project is aimed as a digital recipe shelf where you can store all your household recipes.
 
 
