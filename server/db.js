@@ -1,8 +1,7 @@
-const { Pool } = require("pg");
-const env = require('dotenv').config()
+require('dotenv').config();
 
 
-const pool = require("pg").Pool;
+const Pool = require("pg").Pool;
 
 const pool = new Pool({
     user: process.env.DB_USER,
