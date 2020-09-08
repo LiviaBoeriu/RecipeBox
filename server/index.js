@@ -1,31 +1,25 @@
 const express = require("express");
-const app = express();
 const cors = require("cors");
 const pool = require("./db");
+const authRoute = require("./routes/jwtAuth");
 require('dotenv').config();
 
 
-// middleware
+const app = express();
+
+// Middleware
+// Using cors the back-end can now communicate with the front-end
 app.use(cors());
-app.use(express.json()); //req.body
+// req.body access
+app.use(express.json());
 
 // Routes
 
-// Insert new recipe
-app.post("/accounts/new-user", async (req, res) => {
-    try {
-        const { email, password, firstname, lastname } = req.body;
-
-        const newUser = await pool.query("INSERT INTO account (email, password, firstname, lastname) VALUES ($1, $2, $3, $4) RETURNING *", [email, password, firstname, lastname]);
-
-        res.json(newUser);
-    } catch (err) {
-        console.error(err.message);
-    }
-});
+// Register and login routes
+app.use("/auth", authRoute);
 
 
 
 app.listen(5000, () => {
-    console.log("server has started");
+    console.log("The server is running");
 });
