@@ -23,12 +23,103 @@ router.get("/recipes", authorization, async (req, res) => {
 
 
 // Add recipe
+router.post("/recipes/new-recipe", authorization, async (req, res) => {
+    try {
+
+        // Destructure req
+        const { userId } = req;
+        const { recipeName, description } = req.body;
+        const containerQuery = await pool.query("SELECT id FROM recipe_container WHERE userid = $1", [userId]);
+        const containerid = containerQuery.rows[0].id;
+
+
+        // Need to add validation to check if the recipe exists already
+        
+        // Add recipe
+        const newRecipe = await pool.query("INSERT INTO recipe (name, containerid, description, userid) VALUES ($1, $2, $3, $4) RETURNING *", [recipeName, containerid, description, userId]);
+
+        res.json(newRecipe.rows[0]);
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Server Error");
+    }
+});
+
 
 // Edit recipe
+router.post("/recipes/edit-recipe", authorization, async (req, res) => {
+    try {
+
+        // Destructure req
+        const { userId } = req;
+        const { recipeid, name, description } = req.body;
+
+        const recipe = await pool.query("SELECT * FROM recipe WHERE id = $1", [recipeid]);
+
+        // Verify if the recipe exists
+        if(!recipe.rows[0]) {
+            console.error(err.message);
+            res.status(404).send("Not found");    
+        }
+
+        // Update recipe
+        const updatedRecipe = await pool.query("UPDATE recipe SET name=($1), description=($2) WHERE id = $3 RETURNING *", [name, description, recipeid]);
+
+        res.json(updatedRecipe);
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Server Error");
+    }
+});
+
 
 // Delete recipe
+router.post("/recipes/delete-recipe", authorization, async (req, res) => {
+    try {
+
+        // Destructure req
+        const { userId } = req;
+        const { recipeid } = req.body;
+
+        const recipe = await pool.query("SELECT * FROM recipe WHERE id = $1", [recipeid]);
+
+        // Verify if tthe recipe exists
+        if(!recipe.rows[0]) {
+            console.error(err.message);
+            res.status(404).send("Not found");    
+        }
+
+        // Delete recipe
+        const updatedRecipe = await pool.query("DELETE FROM recipe WHERE id = $1", [ recipeid]);
+
+        res.json(updatedRecipe);
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Server Error");
+    }
+});
+
 
 // Search recipe
+router.post("/recipes/search", authorization, async (req, res) => {
+    try {
 
+        // Destructure req
+        const { userId } = req;
+        const { recipeName } = req.body;
+
+        // Get recipe based on recipe id
+        const recipe = await pool.query("SELECT * FROM recipe WHERE name LIKE $1 AND userid = $2", [recipeName, userId]);
+       
+        res.json(recipe.rows[0]);
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Server Error");
+    }
+});
 
 module.exports = router;
