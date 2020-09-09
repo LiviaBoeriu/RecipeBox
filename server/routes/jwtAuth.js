@@ -77,6 +77,8 @@ router.post("/login", validInfo, async (req, res) => {
 });
 
 
+// Edit profile
+
 // Verification route
 router.get("/is-verified", authorization, async (req, res) => {
     try {
