@@ -23,7 +23,7 @@ router.get("/recipes", authorization, async (req, res) => {
 
 
 // Add recipe
-router.post("/recipes/new-recipe", authorization, async (req, res) => {
+router.post("/recipes/recipe", authorization, async (req, res) => {
     try {
 
         // Destructure req
@@ -83,7 +83,7 @@ router.post("/recipes/instructions", authorization, async (req, res) => {
 
 
 // Edit recipe
-router.post("/recipes/edit-recipe", authorization, async (req, res) => {
+router.post("/recipes/recipe", authorization, async (req, res) => {
     try {
 
         // Destructure req
@@ -110,7 +110,7 @@ router.post("/recipes/edit-recipe", authorization, async (req, res) => {
 
 
 // Delete recipe
-router.post("/recipes/delete-recipe", authorization, async (req, res) => {
+router.post("/recipes/recipe", authorization, async (req, res) => {
     try {
 
         // Destructure req
