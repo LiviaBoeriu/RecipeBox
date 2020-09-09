@@ -34,7 +34,7 @@ router.post("/recipes/new-recipe", authorization, async (req, res) => {
 
 
         // Need to add validation to check if the recipe exists already
-        
+
         // Add recipe
         const newRecipe = await pool.query("INSERT INTO recipe (name, containerid, description, userid) VALUES ($1, $2, $3, $4) RETURNING *", [recipeName, containerid, description, userId]);
 
@@ -45,6 +45,41 @@ router.post("/recipes/new-recipe", authorization, async (req, res) => {
         res.status(500).send("Server Error");
     }
 });
+
+
+// Add new recipe instructions
+router.post("/recipes/instructions", authorization, async (req, res) => {
+    try {
+
+        // Destructure req
+        const { userId } = req;
+        const { recipeid, instructionNumber, instructionText } = req.body;
+        const containerQuery = await pool.query("SELECT id FROM recipe_container WHERE userid = $1", [userId]);
+        const containerid = containerQuery.rows[0].id;
+        let newInstruction;
+        const recipe = await pool.query("SELECT * FROM recipe WHERE id = $1", [recipeid]);
+
+        // Verify if the recipe exists
+        if(recipe && !recipe.rows[0]) {
+            res.status(404).send("Not found");    
+        }
+        
+        const instruction = await pool.query("SELECT * FROM instructions WHERE instruction_number=$1 AND recipeid=$2", [instructionNumber, recipeid]);
+        console.log(instruction.rows[0]);
+        // If instruction does not exist insert it, else return error message
+        if(instruction && !instruction.rows[0]) {
+            newInstruction = await pool.query("INSERT INTO instructions (instruction_number, instruction_text, containerid, recipeid) VALUES ($1, $2, $3, $4) RETURNING *", [instructionNumber, instructionText, containerid, recipeid]);
+            res.json(newInstruction.rows[0]);
+        } else {
+            res.status(403).send("Instruction already exists");
+        }
+    } catch (err) {
+        console.error(err.message);
+        res.send("Server Error");
+    }
+});
+
+// Edit instruction
 
 
 // Edit recipe
@@ -58,8 +93,7 @@ router.post("/recipes/edit-recipe", authorization, async (req, res) => {
         const recipe = await pool.query("SELECT * FROM recipe WHERE id = $1", [recipeid]);
 
         // Verify if the recipe exists
-        if(!recipe.rows[0]) {
-            console.error(err.message);
+        if(recipe && !recipe.rows[0]) {
             res.status(404).send("Not found");    
         }
 
@@ -86,13 +120,12 @@ router.post("/recipes/delete-recipe", authorization, async (req, res) => {
         const recipe = await pool.query("SELECT * FROM recipe WHERE id = $1", [recipeid]);
 
         // Verify if tthe recipe exists
-        if(!recipe.rows[0]) {
-            console.error(err.message);
+        if(recipe && !recipe.rows[0]) {
             res.status(404).send("Not found");    
         }
 
         // Delete recipe
-        const updatedRecipe = await pool.query("DELETE FROM recipe WHERE id = $1", [ recipeid]);
+        const updatedRecipe = await pool.query("DELETE FROM recipe WHERE id = $1", [recipeid]);
 
         res.json(updatedRecipe);
 
