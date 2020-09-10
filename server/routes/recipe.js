@@ -80,6 +80,29 @@ router.post("/recipes/instructions", authorization, async (req, res) => {
 });
 
 // Edit instruction
+router.patch("/recipes/:recipeId/instructions/:instructionId", authorization, async (req, res) => {
+    try {
+
+        const { instructionText } = req.body;
+        const { recipeId, instructionId} = req.params;
+
+        const recipe = await pool.query("SELECT * FROM recipe WHERE id = $1", [recipeId]);
+        console.log(recipe.rows);
+        // Verify if the recipe exists
+        if(recipe && !recipe.rows[0]) {
+            res.status(404).send("Not found");    
+        }
+
+        // Update recipe
+        const updatedInstruction = await pool.query("UPDATE instructions SET instruction_text=($1) WHERE id = $2 RETURNING *", [instructionText, instructionId]);
+
+        res.json(updatedInstruction);
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Server Error");
+    }
+});
 
 
 // Edit recipe
