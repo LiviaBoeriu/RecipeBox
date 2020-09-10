@@ -6,7 +6,7 @@ const authorization = require("../middleware/authorization");
 // Get recipe info
 router.get("/recipes", authorization, async (req, res) => {
     try {
-        
+        // console.log(req.query);
         // Destructure req.body
         const { userId } = req;
 
@@ -23,7 +23,7 @@ router.get("/recipes", authorization, async (req, res) => {
 
 
 // Add recipe
-router.post("/recipes/recipe", authorization, async (req, res) => {
+router.post("/recipes", authorization, async (req, res) => {
     try {
 
         // Destructure req
@@ -83,7 +83,7 @@ router.post("/recipes/instructions", authorization, async (req, res) => {
 
 
 // Edit recipe
-router.post("/recipes/recipe", authorization, async (req, res) => {
+router.patch("/recipes/recipe", authorization, async (req, res) => {
     try {
 
         // Destructure req
@@ -110,14 +110,14 @@ router.post("/recipes/recipe", authorization, async (req, res) => {
 
 
 // Delete recipe
-router.post("/recipes/recipe", authorization, async (req, res) => {
+router.delete("/recipes/:recipeId", authorization, async (req, res) => {
     try {
 
         // Destructure req
         const { userId } = req;
-        const { recipeid } = req.body;
+        const { recipeId } = req.params;
 
-        const recipe = await pool.query("SELECT * FROM recipe WHERE id = $1", [recipeid]);
+        const recipe = await pool.query("SELECT * FROM recipe WHERE id = $1", [recipeId]);
 
         // Verify if tthe recipe exists
         if(recipe && !recipe.rows[0]) {
@@ -125,7 +125,7 @@ router.post("/recipes/recipe", authorization, async (req, res) => {
         }
 
         // Delete recipe
-        const updatedRecipe = await pool.query("DELETE FROM recipe WHERE id = $1", [recipeid]);
+        const updatedRecipe = await pool.query("DELETE FROM recipe WHERE id = $1", [recipeId]);
 
         res.json(updatedRecipe);
 
@@ -137,15 +137,16 @@ router.post("/recipes/recipe", authorization, async (req, res) => {
 
 
 // Search recipe
-router.post("/recipes/search", authorization, async (req, res) => {
+router.get("/recipes/search", authorization, async (req, res) => {
     try {
 
         // Destructure req
         const { userId } = req;
-        const { recipeName } = req.body;
+        const { name } = req.query;
+
 
         // Get recipe based on recipe id
-        const recipe = await pool.query("SELECT * FROM recipe WHERE name LIKE $1 AND userid = $2", [recipeName, userId]);
+        const recipe = await pool.query("SELECT * FROM recipe WHERE name LIKE $1 AND userid = $2", [name, userId]);
        
         res.json(recipe.rows[0]);
 
