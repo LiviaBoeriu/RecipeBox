@@ -27,7 +27,7 @@ router.post("/recipes", authorization, async (req, res) => {
 
         // Destructure req
         const { userId } = req;
-        const { recipeName, description, ingredients, instructions } = req.body;
+        const { recipeName, cookingTime, description, ingredients, instructions } = req.body;
 
         // Map all values in ingredients and instructions
         let ingredientName = ingredients.map(({ ingredientName }) => ingredientName);
@@ -41,7 +41,7 @@ router.post("/recipes", authorization, async (req, res) => {
         const containerId = containerQuery.rows[0].id;
 
         // Add recipe
-        const newRecipe = await pool.query("INSERT INTO recipe (name, containerid, description, userid) VALUES ($1, $2, $3, $4) RETURNING *", [recipeName, containerId, description, userId]);
+        const newRecipe = await pool.query("INSERT INTO recipe (name, containerid, description, userid, cookingTime) VALUES ($1, $2, $3, $4, $5) RETURNING *", [recipeName, containerId, description, userId, cookingTime]);
 
         // Add ingredients to ingredient table
         // get recipe id
