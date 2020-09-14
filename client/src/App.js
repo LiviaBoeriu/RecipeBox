@@ -1,8 +1,17 @@
 import React, { Fragment } from 'react';
-import './App.css';
+import './assets/styles/index.scss';
+
+// components
+import Login from "./components/Login/Login.js"
 
 function App() {
-  return <Fragment></Fragment>
+  return (
+    <Fragment>
+      <div className="container">
+        <Login />
+      </div>
+    </Fragment>
+  );
 }
 
 export default App;

@@ -1,0 +1,39 @@
+$defaultSize: 12px; 
+$font: 'DM Sans', sans-serif;
+$defaultTextColor: #313131;
+
+
+* {
+    font-size: $defaultSize;
+    font-family: $font;
+    color: $defaultTextColor;
+}
+
+h6 {
+    font-size: 1.5rem;
+}
+
+h5 {
+    font-size: 2rem;
+}
+
+h4 {
+    font-size: 3rem;
+}
+
+h3 {
+    font-size: 3.5rem;
+}
+
+h2 {
+    font-size: 5rem;
+}
+
+h1 {
+    font-size: 6rem;
+}
+
+
+.container {
+    padding: 5%;
+}
