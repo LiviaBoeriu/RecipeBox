@@ -58,8 +58,10 @@ input:focus {
 #logo {
     font-family: $logoFont;
     font-size: 2.5rem;
-    padding: 2vh 2vh;
     width: fit-content;
+    position: absolute;
+    top: 2vh;
+    left: 5vw;
 }
 
 button {
@@ -85,11 +87,46 @@ button:hover {
     margin: 2.5vh 0;
 }
 
+.form-input-container > a {
+    font-size: 1.3rem;
+    color: #A6A6A6;
+    margin-top: 1vh;
+    align-self: flex-end;
+}
+
+.form-input-container > a:hover {
+    color: $labelColor;
+}
+
 .login-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: max-content;
+    width: fit-content;
+    align-self: center;
+}
+
+.left-login-container {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    width: 50%;
+}
+
+.login-page-picture {
+    display: block;
+    max-width: 100%;
+}
+
+.login-picture-container {
+    width: 50%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.login-page {
+    display: flex;
+    justify-content: space-between;
 }
 
 .login-form {
