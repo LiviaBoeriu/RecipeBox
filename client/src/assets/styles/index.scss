@@ -1,5 +1,6 @@
 $defaultSize: 12px; 
 $font: 'DM Sans', sans-serif;
+$logoFont: 'Berkshire Swash', cursive;
 $defaultTextColor: #313131;
 
 
@@ -33,7 +34,20 @@ h1 {
     font-size: 6rem;
 }
 
+a {
+    text-decoration: none;
+}
 
-.container {
-    padding: 5%;
+
+
+input {
+    border: 0;
+    border-bottom: solid 1px;
+    padding: 1vh 2vw;
+}
+
+#logo {
+    font-family: $logoFont;
+    font-size: 2.5rem;
+    width: fit-content;
 }

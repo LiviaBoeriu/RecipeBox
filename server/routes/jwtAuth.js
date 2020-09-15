@@ -46,7 +46,6 @@ router.post("/login", validInfo, async (req, res) => {
     try {
 
         // Destructure req.body
-
         const { username, password} = req.body;
 
         // Check if user doesn't exist (if not throw error)
@@ -62,12 +61,12 @@ router.post("/login", validInfo, async (req, res) => {
         const validPassword = await bcrypt.compare(password, user.rows[0].password);
 
         if(!validPassword) {
+            
+        console.log(validPassword);
             return res.status(401).json("Password or email is incorrect")
         }
-
         // Give jwt token
         const token = jwtGenerator(user.rows[0].id);
-
         res.json({ token });
 
     } catch (err) {
