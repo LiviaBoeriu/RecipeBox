@@ -1,5 +1,4 @@
-import React, { Fragment, useState } from "react";
-// import "../../assets/styles/index.scss";
+import React from "react";
 
 const Input = (props) => {
 

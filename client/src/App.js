@@ -2,8 +2,8 @@ import React, { Fragment } from 'react';
 import './assets/styles/index.scss';
 
 // components
-import Login from "./components/Login/Login.js"
-import Logo from "./components/Logo/Logo"
+import Login from "./components/Login"
+import Logo from "./components/Logo"
 
 function App() {
   return (

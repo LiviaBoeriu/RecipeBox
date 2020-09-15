@@ -2,6 +2,8 @@ $defaultSize: 12px;
 $font: 'DM Sans', sans-serif;
 $logoFont: 'Berkshire Swash', cursive;
 $defaultTextColor: #313131;
+$pinkHighlight: #AB3E62;
+$labelColor: #4D4D4D;
 
 
 * {
@@ -38,16 +40,81 @@ a {
     text-decoration: none;
 }
 
-
-
 input {
-    border: 0;
-    border-bottom: solid 1px;
-    padding: 1vh 2vw;
+    border: transparent;
+    border-bottom: solid 2px;
+    padding: 1vh 0;
+    height: 2vh;
+    font-size: 2rem;
+}
+
+input:focus {
+    outline-style: dashed;
+    outline-width: 0.2;
+    outline-color: white;
+    border-bottom: solid 2px $pinkHighlight;
 }
 
 #logo {
     font-family: $logoFont;
     font-size: 2.5rem;
+    padding: 2vh 2vh;
     width: fit-content;
+}
+
+button {
+    display: block;
+    padding: 0.5vw;
+    border: solid 0.7px $pinkHighlight;
+    background-color: transparent;
+    color: $pinkHighlight;
+    margin: 1vh 0;
+    font-size: 2rem;
+}
+
+button:hover {
+    cursor: pointer;
+    outline-style: solid;
+    outline-width: 1px;
+    outline-color: $pinkHighlight;
+}
+
+.form-input-container {
+    display: flex;
+    flex-direction: column;
+    margin: 2.5vh 0;
+}
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: max-content;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 3vh 0;
+}
+
+.form-inputs {
+    margin-bottom: 10vh;
+}
+
+.register-call-to-action {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.register-call-to-action a {
+    text-decoration: underline $pinkHighlight;
+    color: $pinkHighlight;
+}
+
+label {
+    font-size: 1.5rem;
+    color: $labelColor;
 }
