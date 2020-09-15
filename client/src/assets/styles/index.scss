@@ -1,4 +1,4 @@
-$defaultSize: 12px; 
+$defaultSize: 14px; 
 $font: 'DM Sans', sans-serif;
 $logoFont: 'Berkshire Swash', cursive;
 $defaultTextColor: #313131;
@@ -10,42 +10,46 @@ $labelColor: #4D4D4D;
     font-size: $defaultSize;
     font-family: $font;
     color: $defaultTextColor;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 h6 {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
 }
 
 h5 {
-    font-size: 2rem;
+    font-size: 1.8rem;
 }
 
 h4 {
-    font-size: 3rem;
+    font-size: 2.5rem;
 }
 
 h3 {
-    font-size: 3.5rem;
+    font-size: 3rem;
 }
 
 h2 {
-    font-size: 5rem;
+    font-size: 4rem;
 }
 
 h1 {
-    font-size: 6rem;
+    font-size: 5rem;
 }
 
 a {
     text-decoration: none;
+    font-size: 1rem;
 }
 
 input {
     border: transparent;
     border-bottom: solid 2px;
     padding: 1vh 0;
-    height: 2vh;
-    font-size: 2rem;
+    height: 2%;
+    font-size: 1.8rem;
 }
 
 input:focus {
@@ -57,7 +61,7 @@ input:focus {
 
 #logo {
     font-family: $logoFont;
-    font-size: 2.5rem;
+    font-size: 2rem;
     width: fit-content;
     position: absolute;
     top: 2vh;
@@ -71,7 +75,7 @@ button {
     background-color: transparent;
     color: $pinkHighlight;
     margin: 1vh 0;
-    font-size: 2rem;
+    font-size: 1.5rem;
 }
 
 button:hover {
@@ -88,7 +92,6 @@ button:hover {
 }
 
 .form-input-container > a {
-    font-size: 1.3rem;
     color: #A6A6A6;
     margin-top: 1vh;
     align-self: flex-end;
@@ -111,6 +114,7 @@ button:hover {
     height: 100vh;
     justify-content: center;
     width: 50%;
+    position: relative;
 }
 
 .login-page-picture {
@@ -152,6 +156,25 @@ button:hover {
 }
 
 label {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
+    color: $labelColor;
+}
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    height: 7vh;
+    bottom: 0;
+    width: 100%;
+    padding: 1vh 5vw;
+}
+
+.social-link {
+    max-width: 100%;
+    max-height: 100%;
+    font-size: 2.2rem;
+    margin: 0 1vw;
     color: $labelColor;
 }

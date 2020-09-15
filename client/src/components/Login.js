@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import Input from "./Input";
 import Button from "./Button";
 import Label from "./Label";
-import Logo from "./Logo"
+import Logo from "./Logo";
+import Footer from "./Footer"
 import LoginPicture from "../assets/images/login-picture.jpg";
 
 
@@ -59,6 +60,8 @@ const Login = () => {
                             <a href="/">Register here!</a>
                     </div>
                 </div>
+
+                <Footer />
             </div>
 
             <div className="login-picture-container">
