@@ -5,6 +5,7 @@ import Label from "./Label";
 import Logo from "./Logo";
 import Footer from "./Footer"
 import LoginPicture from "../assets/images/login-picture.jpg";
+import { Link }  from "react-router-dom";
 
 
 const Login = () => {
@@ -57,7 +58,7 @@ const Login = () => {
                     
                     <div className="register-call-to-action">
                             <p>Want to create an account?</p>
-                            <a href="/">Register here!</a>
+                            <Link to="/register">Register here!</Link>
                     </div>
                 </div>
 

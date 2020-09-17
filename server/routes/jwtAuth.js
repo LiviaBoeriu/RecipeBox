@@ -14,9 +14,8 @@ router.post("/register", validInfo, async (req, res) => {
 
         // Check if user exists (if true then throw error)
         const user = await pool.query("SELECT * FROM account WHERE username = $1", [username]);
-
         if(user.rows.length !== 0) {
-            return res.status(401).send("User already exists");
+            return res.status(401).json({message: "User already exists"});
         }
 
         // Bcrypt the user's password
