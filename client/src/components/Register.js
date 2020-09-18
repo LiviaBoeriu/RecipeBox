@@ -5,6 +5,7 @@ import Label from "./Label";
 import Logo from "./Logo";
 import Footer from "./Footer"
 import LoginPicture from "../assets/images/login-picture.jpg";
+import { Link } from "react-router-dom";
 
 
 const Register = () => {
@@ -48,12 +49,14 @@ const Register = () => {
         <div className="login-page">
             <div className="left-login-container">
                 <Logo />
+
                 <div className="login-container">
                     <h4 className="form-header">
                         Register below
-                    </h4>
+                    </h4>   
                     <form className="login-form" onSubmit={onSubmitForm}>
-                        <div className="form-inputs">
+
+                        <div className="form-inputs register">
                             <div className="form-input-container">
                             <Label value="Username *"/>
                             <Input value={username} changeHandler={setUsername} type="text"/>
@@ -82,12 +85,17 @@ const Register = () => {
                             </div>
                             <p>* Marked fields are required</p>
 
-                            <p ref={ message } className="notification-message-register no-opacity"  >Error message</p>
+                            <p ref={ message } className="notification-message-register no-opacity"> Error message </p>
                         </div>
 
 
                         <Button class="form-button" label="Register"/>
                     </form>
+
+                    <div className="register-call-to-action">
+                        <Link to="/">Already have an account?</Link>
+                    </div>
+
                 </div>
 
                 <Footer />

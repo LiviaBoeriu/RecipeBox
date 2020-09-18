@@ -150,6 +150,10 @@ button:hover {
     margin-bottom: 10vh;
 }
 
+.form-inputs, .register {
+    margin-bottom: 5vh;
+}
+
 .register-call-to-action {
     display: flex;
     flex-direction: column;
@@ -211,4 +215,17 @@ footer {
 
 .success-message {
     color: green;    
+}
+
+.back-button {
+    border: none;
+    width: fit-content;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: auto;
+}
+
+.header-form-container {
+    position: relative;
 }
