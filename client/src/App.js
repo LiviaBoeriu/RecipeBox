@@ -9,15 +9,17 @@ import {
 } from "react-router-dom";
 
 // components
-import Login from "./components/Login";
-import Register from "./components/Register";
+import LoginPage from "./components/LoginPage";
+import Register from "./components/RegisterPage";
+import DashboardPage from './components/DashboardPage';
 
 function App() {
   return (
       <Router>
         <Switch>
-          <Route exact path="/" component={ Login } />
+          <Route exact path="/" component={ LoginPage } />
           <Route exact path="/register" component={ Register } />
+          <Route exact path="/dashboard" component={ DashboardPage } />
         </Switch>
       </Router>
   );
