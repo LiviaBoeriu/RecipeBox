@@ -37,6 +37,7 @@ const LoginPage = ({setAuth}) => {
                     localStorage.setItem("token", parseRes.token);
                     setAuth(true);
                 } else {
+                    setAuth(false);
                     message.current.classList.remove("no-opacity");
                     message.current.classList.add("error-message");
                     message.current.innerHTML = "Your email or password are incorrect";

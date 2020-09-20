@@ -26,7 +26,7 @@ function App() {
   // Verifying if the user is authenticated for page refresh
   const isAuth = async () => {
     try{
-      const response = await fetch("http://localhost:5000/auth/is-verify", {
+      const response = await fetch("http://localhost:5000/auth/is-verified", {
         method: "GET",
         headers: {token : localStorage.token}
       });

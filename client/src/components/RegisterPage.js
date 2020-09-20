@@ -27,6 +27,7 @@ const Register = ({setAuth}) => {
             const body = { username, password, firstname, lastname };
 
             if(!username || !password || !firstname || !lastname){
+                setAuth(false);
                 message.current.classList.remove("no-opacity");
                 message.current.classList.add("error-message");
                 message.current.innerHTML = "The required fields are not completed";
@@ -55,7 +56,6 @@ const Register = ({setAuth}) => {
                         localStorage.setItem("token", parseRes.token);
 
                         setAuth(true);
-
                     }
 
                 }
