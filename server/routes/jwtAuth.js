@@ -52,7 +52,7 @@ router.post("/login", validInfo, async (req, res) => {
         const user = await pool.query("SELECT * FROM account WHERE username = $1", [username]);
 
         if (user.rows.length === 0) {
-            return res.status(401).json("Password or user is incorrect");
+            return res.status(401).json({message: "Password or user is incorrect", statusCode: 401});
         }
 
         // Check if incomming password is the same as the db password
@@ -60,8 +60,9 @@ router.post("/login", validInfo, async (req, res) => {
         const validPassword = await bcrypt.compare(password, user.rows[0].password);
 
         if(!validPassword) {
-            return res.status(401).json("Password or email is incorrect")
+            return res.status(401).json({message: "Password or user is incorrect", statusCode: 401})
         }
+
         // Give jwt token
         const token = jwtGenerator(user.rows[0].id);
         res.json({ token });

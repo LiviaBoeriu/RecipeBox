@@ -8,7 +8,7 @@ import LoginPicture from "../assets/images/login-picture.jpg";
 import { Link } from "react-router-dom";
 
 
-const Register = () => {
+const Register = ({setAuth}) => {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -18,26 +18,47 @@ const Register = () => {
     const message = useRef();
 
 
+    // Need to add response in case the the user already exists
     const onSubmitForm = async (e) => {
         e.preventDefault();
         try {
-            const body = { username, password, repeatPassword, firstname, lastname };
 
-            if(password !== repeatPassword) {
+            // Construct the request body with state elements
+            const body = { username, password, firstname, lastname };
+
+            if(!username || !password || !firstname || !lastname){
                 message.current.classList.remove("no-opacity");
                 message.current.classList.add("error-message");
-                message.current.innerHTML = "The passwords do not match";
+                message.current.innerHTML = "The required fields are not completed";
             } else {
-                message.current.classList.add("no-opacity");
+                // Check if the password matches and then make the request
+                if(password !== repeatPassword) {
+                    message.current.classList.remove("no-opacity");
+                    message.current.classList.add("error-message");
+                    message.current.innerHTML = "The passwords do not match";
+                } else {
+                    message.current.classList.add("no-opacity");
 
-                const response = await fetch("http://localhost:5000/auth/register", 
-                {
-                    method: "POST",
-                    headers: {"Content-type": "application/json"},
-                    body: JSON.stringify(body)
-                });
-                
-                console.log(response); 
+                    const response = await fetch("http://localhost:5000/auth/register", 
+                    {
+                        method: "POST",
+                        headers: {"Content-type": "application/json"},
+                        body: JSON.stringify(body)
+                    });
+
+
+                    if(response.status === 200) {
+                        // Parse the response so that we can use the token
+                        const parseRes = await response.json();
+
+                        // Set the token to the localStorage
+                        localStorage.setItem("token", parseRes.token);
+
+                        setAuth(true);
+
+                    }
+
+                }
             }
 
         } catch (err) {
@@ -95,7 +116,7 @@ const Register = () => {
                     <div className="register-call-to-action">
                         <Link to="/">Already have an account?</Link>
                     </div>
-
+ 
                 </div>
 
                 <Footer />

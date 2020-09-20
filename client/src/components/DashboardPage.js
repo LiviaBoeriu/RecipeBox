@@ -1,103 +1,36 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Footer from "./Footer";
 import Navigation from "./Navigation";
 
 const DashboardPage = () => {
 
-    // const [username, setUsername] = useState("");
-    // const message = useRef();
+    const [name, setName] = useState("");
 
+    async function getName() {
+        try {
+            const response = await fetch("http://localhost:5000/dashboard/",
+            {
+                method: "GET",
+                headers: { token: localStorage.token }
+            });
 
-    // const onSubmitForm = async (e) => {
-    //     e.preventDefault();
-    //     try {
-    //         const body = { username, password, repeatPassword, firstname, lastname };
+            const parseRes = await response.json();
 
-    //         if(password !== repeatPassword) {
-    //             message.current.classList.remove("no-opacity");
-    //             message.current.classList.add("error-message");
-    //             message.current.innerHTML = "The passwords do not match";
-    //         } else {
-    //             message.current.classList.add("no-opacity");
+            setName(parseRes.firstname);
+        } catch (err) {
+            console.error(err.message);
+        }
+    }
 
-    //             const response = await fetch("http://localhost:5000/auth/register", 
-    //             {
-    //                 method: "POST",
-    //                 headers: {"Content-type": "application/json"},
-    //                 body: JSON.stringify(body)
-    //             });
-                
-    //             console.log(response); 
-    //         }
-
-    //     } catch (err) {
-    //         console.error(err.message);
-    //     }
-    // }
+    useEffect( () => {
+        getName();
+    });
 
     return (
-        // <div className="login-page">
-        //     <div className="left-login-container">
-
-        //         <div className="login-container">
-        //             <h4 className="form-header">
-        //                 Register below
-        //             </h4>   
-        //             <form className="login-form" onSubmit={onSubmitForm}>
-
-        //                 <div className="form-inputs register">
-        //                     <div className="form-input-container">
-        //                     <Label value="Username *"/>
-        //                     <Input value={username} changeHandler={setUsername} type="text"/>
-        //                     </div>
-
-        //                     <div className="form-input-container">
-        //                     <Label value="Password *"/>
-        //                     <Input value={password} changeHandler={setPassword} type="password"/>
-        //                     </div>
-
-        //                     <div className="form-input-container">
-        //                     <Label value="Repeat Password *"/>
-        //                     <Input value={repeatPassword} changeHandler={setRepeatPassword} type="password"/>
-        //                     </div>
-
-        //                     <div className="register-name-container">
-        //                         <div className="form-input-container">
-        //                         <Label value="First Name *"/>
-        //                         <Input value={firstname} changeHandler={setFirstName} type="text"/>
-        //                         </div>
-
-        //                         <div className="form-input-container">
-        //                         <Label value="Last Name"/>
-        //                         <Input value={lastname} changeHandler={setLastName} type="text"/>
-        //                         </div>
-        //                     </div>
-        //                     <p>* Marked fields are required</p>
-
-        //                     <p ref={ message } className="notification-message-register no-opacity"> Error message </p>
-        //                 </div>
-
-
-        //                 <Button class="form-button" label="Register"/>
-        //             </form>
-
-        //             <div className="register-call-to-action">
-        //                 <Link to="/">Already have an account?</Link>
-        //             </div>
-
-        //         </div>
-
-        //     </div>
-
-        //     <div className="login-picture-container">
-        //         <img className="login-page-picture" src={LoginPicture} alt="Food items on a table" />
-        //     </div>
-        // </div>
         <div>
-        <Navigation />
+            <Navigation firstName={name}/>
 
-        <Footer />
-
+            <Footer />
         </div>
     );
 }

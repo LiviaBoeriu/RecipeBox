@@ -2,6 +2,20 @@ const router = require("express").Router();
 const pool = require("../db");
 const authorization = require("../middleware/authorization");
 
+// Get user
+router.get("/", authorization, async (req, res) => {
+    try { 
+        // Get the user data
+        const userData = await pool.query("SELECT * FROM account WHERE id = $1", [req.userId]);
+        
+        res.json(userData.rows[0]);
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Server Error");
+    }
+});
+
 
 // Get recipe info
 router.get("/recipes", authorization, async (req, res) => {
