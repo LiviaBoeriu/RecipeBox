@@ -1,4 +1,4 @@
-import React,  { useState } from 'react';
+import React,  { useState, useEffect } from 'react';
 import './assets/styles/index.scss';
 
 import { 
@@ -18,9 +18,30 @@ function App() {
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
+  // Setting a boolen if the user is authenticated or not
   const setAuth = (boolean) => {
     setIsAuthenticated(boolean);
   }
+
+  // Verifying if the user is authenticated for page refresh
+  const isAuth = async () => {
+    try{
+      const response = await fetch("http://localhost:5000/auth/is-verify", {
+        method: "GET",
+        headers: {token : localStorage.token}
+      });
+
+      const parseRes = await response.json();
+
+      parseRes === true ? setIsAuthenticated(true) : setIsAuthenticated(false);
+    } catch(err) {
+      console.log(err.message);
+    }
+  }
+
+  useEffect( () =>  {
+      isAuth();
+  }, []);
 
   return (
       <Router>

@@ -6,6 +6,7 @@ const DashboardPage = () => {
 
     const [name, setName] = useState("");
 
+    // Get the users data from the server
     async function getName() {
         try {
             const response = await fetch("http://localhost:5000/dashboard/",
@@ -22,14 +23,25 @@ const DashboardPage = () => {
         }
     }
 
+    // Function gets called when component has been mount
     useEffect( () => {
         getName();
-    });
+    }, []);
+
+
+    // Logout function
+    // const logout = (e) => {
+    //     e.preventDefault();
+    //     localStorage.removeItem("token");
+    //     setAuth(false);
+    // }
+
 
     return (
         <div>
             <Navigation firstName={name}/>
 
+            {/* <Button onClick={e => logout(e)} */}
             <Footer />
         </div>
     );
