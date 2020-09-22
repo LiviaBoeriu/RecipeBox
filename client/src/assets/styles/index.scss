@@ -274,3 +274,27 @@ footer {
     border-bottom: solid #313131 1px;
 }
 
+.default-padding{
+    margin: 0 10vw;
+}
+
+.recipe-dashboard-card {
+    width: 14vw;
+    height: 14vw;
+    background-color: lightgrey;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.recipe-dashboard-card > * {
+    margin: 1% 4%;
+}
+
+.card-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+

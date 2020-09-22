@@ -7,7 +7,7 @@ import Footer from "./Footer"
 import LoginPicture from "../assets/images/login-picture.jpg";
 import { Link } from "react-router-dom";
 
-
+// Maybe add toastify for successful registration, login, logout
 const Register = ({setAuth}) => {
 
     const [username, setUsername] = useState("");

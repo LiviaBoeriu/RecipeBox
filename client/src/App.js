@@ -49,6 +49,9 @@ function App() {
           <Route exact path="/" render={props => !isAuthenticated ? <LoginPage {...props} setAuth={setAuth}/> : <Redirect to="/dashboard" />} /> 
           <Route exact path="/register" render={props => !isAuthenticated ? <Register {...props} setAuth={setAuth}/> : <Redirect to="/" />} />
           <Route exact path="/dashboard/" render={props => isAuthenticated ? <DashboardPage {...props} setAuth={setAuth}/> : <Redirect to="/" />} />
+          {/* <Route exact path="/dashboard/recipe-index" render={props => isAuthenticated ? <RecipeIndex {...props} setAuth={setAuth}/> : <Redirect to="/" />} />
+          <Route exact path="/dashboard/add-recipe" render={props => isAuthenticated ? <AddRecipe {...props} setAuth={setAuth}/> : <Redirect to="/" />} /> */}
+
         </Switch>
       </Router>
   );
